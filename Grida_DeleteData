@@ -1,0 +1,86 @@
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class DeleteData { //클래스 맞춰서 변경
+    //private String winHandleBefore;
+    private WebElement element;
+    private String google_email = ""; //공유계정 id 
+    private String password = ""; //공유계정 비밀번호 
+    private WebDriver driver;
+    private String url;
+
+
+
+    public static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
+    public static final String WEB_DRIVER_PATH = "/Users/gimhansol/Documents/chromedriver";
+
+    public DeleteData() { //클래스 맞춰서 변경
+        System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH); //driver보다 위에 사용할 
+        driver = new ChromeDriver();
+
+        url = "https://gridaboard.io/";
+
+    }
+
+    public void deleteBot() {
+        try {
+            driver.get(url);
+
+            Thread.sleep(5000);
+
+
+            element = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div/div[2]/div/div[3]/button[1]"));
+            element.click();
+            //로그인 버튼 선택
+
+            Thread.sleep(7000);
+            List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            driver.switchTo().window(tabs.get(1));
+            //새탭으로 전환
+
+            WebElement sendid = driver.findElement(By.xpath("//*[@id=\"identifierId\"]"));
+            sendid.click();
+            sendid.sendKeys(google_email);
+            //아이디 입력
+
+            WebElement idnext = driver.findElement(By.xpath("//*[@id=\"identifierNext\"]/div/button/span"));
+            idnext.click();
+            //다음
+
+            Thread.sleep(2000);
+            WebElement sendpassword = driver.findElement(By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input"));
+            sendpassword.click();
+            sendpassword.sendKeys(password);
+            //비밀번호 입력
+
+            WebElement passnext = driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/div/button/span"));
+            passnext.click();
+            //담
+
+            System.out.println("------------Login Success------------");
+            /*------------------------------------------------------자동 로그인 완료--------------------------------------------------------------*/
+
+
+        } catch (Exception e) {
+
+        } finally {
+            //driver.close(); //나중에 스크립트 완성하고 활성화 하시면 될 것 같아요
+        }
+    }
+
+    public static void main(String[] args) {
+        // TODO Auto-generated method stub
+
+        DeleteData bot1 = new DeleteData();
+        bot1.deleteBot();
+
+    }
+
+}
