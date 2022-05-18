@@ -54,13 +54,12 @@ public class GoogleLogin {
             element = driver.findElement(By.xpath("//*[@id=\"passwordNext\"]/div/button/span"));
             element.click();
 
-//            relatedURL = driver.getCurrentUrl();
-//            System.out.println(relatedURL);
-
             Thread.sleep(7000);
 
             driver.switchTo().window(tabs.get(0));
 
+            WebElement popupClose = driver.findElement(By.cssSelector("#root > div > div.defaultLayout > div.jss68.jss72 > div > svg"));
+            popupClose.click();
 
 
         } catch (Exception e) {
