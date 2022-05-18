@@ -21,8 +21,8 @@ public class GoogleLogin {
     public static final String WEB_DRIVER_PATH = "C:\\chromedriver.exe";
 
     public GoogleLogin() {
-        driver = new ChromeDriver();
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
+        driver = new ChromeDriver();
 
         url = "https://neostudio-staging.web.app/";
     }
