@@ -33,13 +33,13 @@ public class MainMenu {
             //System.out.println("=============test2: main menu 스크롤 성공========");
 
 
-            ArrayList<String> mainMenuName = new ArrayList<>(); //메인메뉴 좌표 담는 배열
+            ArrayList<String> mainMenuName = new ArrayList<>(); //메인메뉴 이름 담는 배열
             WebElement mainMenu = null;
             for (int n = 1; n <7; n++) {
                 mainMenu = (WebElement) driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div[1]/div/div[2]/li[" + n + "]"));
-                mainMenuName.add(mainMenu.getText()); //mainMenu에서 텍스트 가져와서 xy에 저장 타임라인- 노트북
+                mainMenuName.add(mainMenu.getText()); //mainMenu에서 텍스트 가져와서 -Name 저장
             }
-            //System.out.println(mainMenu); //메인 메뉴 names 출력됨
+            
 
             Timeline = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div[1]/div/div[2]/li[1]"));
             Notebook = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/div[1]/div/div[2]/li[2]"));
