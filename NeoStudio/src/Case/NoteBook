@@ -1,0 +1,258 @@
+package Case;
+
+import java.util.*;
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import static Base.GoogleLogin.driver;
+import static Base.GoogleLogin.scroll;
+
+public class NoteBook{
+    public static String nbook_total;
+    public static String page_num1;
+    public static String page_num2;
+    public static String page_num3;
+    public static String page_num4;
+    public static String page_num5;
+    String page_total;
+
+
+    public void NBSorting(){
+        try {
+            Actions action = new Actions(driver);
+            WebElement noteBook = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]/li[2]"));
+            noteBook.click();
+
+            WebElement NBview = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div"));
+            action.moveToElement(NBview).perform();
+
+            scroll();
+
+            WebElement side = driver.findElement(By.cssSelector("button > span.MuiIconButton-label > svg"));
+            side.click();
+
+            ArrayList<WebElement> noteLis = new ArrayList<WebElement>();
+            ArrayList<String> noteList_side = new ArrayList<>();
+            ArrayList<String> noteList = new ArrayList<>();
+            ArrayList<String> noteList_sort = new ArrayList<>();
+
+            WebElement nbook_ele = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div/div[1]/div/div[1]/p"));
+            String nbook_str = nbook_ele.getText();
+            char[] nbook_arr = nbook_str.toCharArray();
+            nbook_total = Character.toString(nbook_arr[3]);
+            int note_check = Integer.parseInt(nbook_total);
+
+            //노트북 전체 갯수 (상단 전체 갯수)
+
+            Thread.sleep(2000);
+
+            noteLis = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiBox-root > ul > div"));
+
+            int k = 1;
+            int j = 1;
+
+            int note_count = 0;
+            int sideNote = 82;
+
+            for (int i = 0; i < noteLis.size(); i++) {
+                WebElement noteNameLis_p = driver.findElement(By.cssSelector("ul > div:nth-child(" + k + ") > p"));
+                noteList.add(noteNameLis_p.getText());
+                k++;
+                note_count++;
+            }
+            ArrayList<String> noteList_Nsort = (ArrayList<String>) noteList.clone();
+            Collections.sort(noteList);
+
+            WebElement nbook_comboBox = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div/div[1]/div/div[2]/button"));
+            nbook_comboBox.click();
+
+            WebElement nbook_sortName = driver.findElement(By.xpath("//*[@id=\"menu-list-grow\"]/li[2]"));
+            nbook_sortName.click();
+
+            Thread.sleep(2000);
+
+            for (int i = 0; i < noteLis.size(); i++) {
+                WebElement noteNameLis_n = driver.findElement(By.cssSelector("ul > div:nth-child(" + j + ") > p"));
+                noteList_sort.add(noteNameLis_n.getText());
+                WebElement noteNameLis_side = driver.findElement(By.cssSelector("div > div.MuiBox-root.jss" + sideNote + " > p"));
+                noteList_side.add(noteNameLis_side.getText());
+                sideNote = sideNote+2;
+                j++;
+            }
+            System.out.println("노트의 개수 : " + note_check);
+            System.out.println("실제 노트의 개수 : " + note_count);
+
+
+            if (note_count == note_check) {
+                System.out.println("노트 수 체크 : PASS");
+            } else {
+                System.out.println("노트 수 체크 : FAIL");
+            }
+            System.out.println("-----------------------------------노트 수 체크 완료---------------------------------------");
+
+            String note_str1 = Arrays.deepToString(noteList.toArray());
+            String note_str2 = Arrays.deepToString(noteList_sort.toArray());
+            String note_str3 = Arrays.deepToString(noteList_side.toArray());
+            String note_str4 = Arrays.deepToString(noteList_Nsort.toArray());
+
+            System.out.println("정렬 전 결과 : " + note_str4);
+            System.out.println("사이드결과 : " + note_str3);
+
+            if (Arrays.equals(noteList_Nsort.toArray(), noteList_side.toArray()) == true) {
+                System.out.println("사이드 네비 & 노트 리스트 일치 : PASS");
+            } else {
+                System.out.println("사이드 네비 & 노트 리스트 일치 : FAIL");
+            }
+
+            System.out.println("기대결과 : " + note_str1);
+            System.out.println("실제결과 : " + note_str2);
+
+            if (Arrays.equals(noteList.toArray(), noteList_sort.toArray()) == true) {
+                System.out.println("노트 이름순 정렬 : PASS");
+            } else {
+                System.out.println("노트 이름순 정렬 : FAIL");
+            }
+            System.out.println("---------------------------------------노트 정렬 완료--------------------------------------------");
+
+        } catch (Exception e){
+
+        }finally {
+        }
+    }
+
+    public void pageCheck(){
+        try {
+            Thread.sleep(1000);
+            Actions action = new Actions(driver);
+//            WebElement scrollPage = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]"));
+//            action.moveToElement(scrollPage).perform();
+
+            ArrayList<WebElement> page = new ArrayList<>();
+            page = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
+
+            Thread.sleep(2000);
+
+            int pageSize = page.size();
+            String pageCount = Integer.toString(pageSize);
+
+            System.out.println("카운트된 필기 페이지 수 : " + pageSize);
+
+            WebElement pageWrt_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[2]/h5"));
+            WebElement page_R = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[1]/p"));
+            System.out.println("네비게이션 바 내 필기 페이지 수 : " + pageWrt_L.getText());
+
+            String page_str = page_R.getText();
+            char[] page_arr = page_str.toCharArray();
+
+            page_num1 = Character.toString(page_arr[22]);
+            page_num2 = Character.toString(page_arr[23]);
+            page_num3 = Character.toString(page_arr[25]);
+            page_num4 = Character.toString(page_arr[26]);
+            page_num5 = Character.toString(page_arr[27]);
+
+            String page_write = page_num1 + page_num2;
+            System.out.println("메인페이지 내 필기 페이지 수 : " + page_write);
+
+            if (Objects.equals(pageWrt_L.getText(), page_write.trim()) && Objects.equals(pageWrt_L.getText(), Integer.toString(pageSize))) {
+                System.out.println("필기 페이지 수 일치 : PASS");
+            } else {
+                System.out.println("필기 페이지 수 일치 : FAIL");
+            }
+
+            WebElement pageAll_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[1]/h5"));
+
+            System.out.println("네비게이션 바 내 전체 페이지 수 : " + pageAll_L.getText());
+            System.out.println("11");
+
+            if(page_num3.equals("/"))
+            {
+                page_total = page_num4 + page_num5;
+            } else{
+                page_total = page_num3 + page_num4 + page_num5;
+            }
+            System.out.println("메인페이지 내 전체 페이지 수 : " + page_total);
+
+            ArrayList<WebElement> pageLis = new ArrayList<WebElement>();
+            pageLis = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
+            ArrayList<String> pageName = new ArrayList<>();
+            ArrayList<String> pageName_sort = new ArrayList<>();
+
+            int a = 1;
+            int b = 1;
+
+            for (int i = 0; i < pageLis.size(); i++) {
+                WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + a + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
+                pageName.add(pageList.getText());
+                a++;
+                Thread.sleep(1000);
+            }
+            System.out.println("이름순 정렬 전 페이지 리스트 : " + pageName);
+            Collections.sort(pageName);
+            System.out.println("실제 이름순 정렬된 페이지 리스트 : " + pageName);
+
+            WebElement pageComboButton = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[2]/button"));
+            pageComboButton.click();
+
+            WebElement pageNameSorting = driver.findElement(By.xpath("//*[@id=\"menu-list-grow\"]/li[2]"));
+            pageNameSorting.click();
+            Thread.sleep(1000);
+
+            for (int i = 0; i < pageLis.size(); i++) {
+                WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + b + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
+                pageName_sort.add(pageList.getText());
+                b++;
+            }
+            System.out.println("이름순 정렬된 페이지 리스트 : " + pageName_sort);
+
+            if (Arrays.equals(pageName.toArray(), pageName_sort.toArray()) == true) {
+                System.out.println("페이지 이름순 정렬 : PASS");
+            } else {
+                System.out.println("페이지 이름순 정렬 : FAIL");
+            }
+        }catch (Exception e){
+
+        }finally {
+
+        }
+    }
+
+    public void NBpageList() {
+        try {
+            Actions action = new Actions(driver);
+
+            ArrayList<WebElement> noteLis = new ArrayList<WebElement>();
+            ArrayList<String> t = new ArrayList<>();
+            ArrayList<WebElement> noteList_side = new ArrayList<>();
+
+//            WebElement NBview = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div"));
+//            action.moveToElement(NBview).perform();
+//
+//            scroll();
+
+            noteLis = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiBox-root > ul > div"));
+
+            int sideNote = 82;
+
+            for (int i = 0; i < noteLis.size(); i++) {
+                WebElement noteNameLis_side = driver.findElement(By.cssSelector("div > div.MuiBox-root.jss" + sideNote + " > p"));
+                noteList_side.add(noteNameLis_side);
+                t.add(noteNameLis_side.getText());
+                sideNote = sideNote+2;
+            }
+
+            for(int i = 0; i < noteLis.size(); i++){
+                noteList_side.get(i).click();
+                pageCheck();
+                System.out.println("---------------------------------------" + (i+1) + "번째 노트북 -------------------------------------------");
+            }
+        } catch (Exception e){
+
+        }finally {
+            driver.close();
+        }
+    }
+
+    public void NoteBookAuto() {
+        NBSorting();
+        NBpageList();
+    }
+}
