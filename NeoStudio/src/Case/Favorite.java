@@ -13,8 +13,6 @@ import static Base.GoogleLogin.driver;
 public class Favorite {
     public static String fv_total;
     public static String favorite_str;
-    public static String favoriteAll_str;
-    public static String favorite_pagelist;
 
 
     public static void main(String[] args) {
