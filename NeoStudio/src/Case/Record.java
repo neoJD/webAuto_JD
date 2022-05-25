@@ -48,9 +48,9 @@ public class Record {
 
         //int형 9와 배열사이즈 int 9비교
         if (Rc_totalInt == RcAll_str.size()) {
-            System.out.println("전체 녹음 수 일치 확인 : PASS");
+            System.out.println("전체 녹음 개수 일치 확인 : PASS");
         } else {
-            System.out.println("전체 녹음 수 일치 확인 : FAIL");
+            System.out.println("전체 녹음  일치 확인 : FAIL");
 
         }
        
