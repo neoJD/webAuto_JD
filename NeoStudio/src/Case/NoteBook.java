@@ -101,13 +101,15 @@ public class NoteBook {
             System.out.println("네비게이션 바 내 필기 페이지 수 : " + pageWrt_L.getText());
 
             Thread.sleep(500);
-            String page_str_write = page_R.getText().substring(22);
-            String[] splited1 = page_str_write.split(" ");
-            String page_write = (splited1[0] + splited1[1]).trim();
 
-            System.out.println("메인페이지 내 필기 페이지 수 : " + page_write);
+            String t = page_R.getText();
+            String[] page_Wsplit = t.split("⏐");
+            String page_arr = page_Wsplit[1];
+            String[] page_write = page_arr.substring(10).split("/");
 
-            if (Objects.equals(pageWrt_L.getText(), page_write) && Objects.equals(pageWrt_L.getText(), Integer.toString(page.size()))) {
+            System.out.println("메인페이지 내 필기 페이지 수 : " + page_write[0].trim());
+
+            if (Objects.equals(pageWrt_L.getText(), page_write[0].trim()) && Objects.equals(pageWrt_L.getText(), Integer.toString(page.size()))) {
                 System.out.println("필기 페이지 수 일치 : PASS");
             } else {
                 System.out.println("필기 페이지 수 일치 : FAIL");
