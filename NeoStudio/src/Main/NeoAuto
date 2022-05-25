@@ -2,7 +2,6 @@ package Main;
 
 import Base.*;
 import Case.*;
-
 import static Base.GoogleLogin.*;
 
 public class NeoAuto {
@@ -10,11 +9,10 @@ public class NeoAuto {
     public static void main(String[] args) {
         try {
             GoogleLogin G = new GoogleLogin();
-            NoteBook NB = new NoteBook();
+            NoteBook N = new NoteBook();
 
             G.Login();
-            NB.NBSorting();
-            NB.NBpageList();
+            N.NoteBook_Run();
         } catch (Exception e) {
 
         } finally {
