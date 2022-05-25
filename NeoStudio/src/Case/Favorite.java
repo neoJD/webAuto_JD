@@ -2,9 +2,11 @@ package Case;
 
 import Base.GoogleLogin;
 import Base.MainMenu;
-import Base.Scroll;
+import static Base.Scroll.*;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.devtools.idealized.Javascript;
 
 import java.util.ArrayList;
 
@@ -15,16 +17,19 @@ public class Favorite {
     public static String favorite_str;
     public static int fv_totalInt;
 
-    public static void Favorite() {
+    public static void Favorite() throws InterruptedException {
+        // ~~기느을 하는메ㅐ소드다
         GoogleLogin G = new GoogleLogin();
         G.Login();
 
         MainMenu M = new MainMenu();
-        M.N_MainMenu();
+        M.MainMenu();
+        scroll_down(3);
         MainMenu.Favorite.click();
+
+
         //--side navigation _scroll& click--
-        Scroll S = new Scroll();
-        S.N_Scroll();
+
 
         //0. 전체 페이지수 : 공백으로 문자열 나누기 - 엘리먼트로 그 값 가져오기
         //1. 즐겨찾기 str 배열로 만들고 리스트 하나 만들어서 전체 배열 담기
@@ -62,9 +67,4 @@ public class Favorite {
         }
 
     }
-
-    public void Favorite_Run() {
-        Favorite();
-    }
 }
-
