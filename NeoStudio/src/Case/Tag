@@ -42,8 +42,9 @@ public class Tag {
         for (int i = 0; i < page.length; i++) {
             // System.out.println(page[i]);
         }
+        
         //page[0]=전체, page[1]=9, page[2]=개 , '전체12/개' '전체/9/개' 3자리면 '전체111개'??
-        Tag_total = page[1]; //string에 9 넣음
+        Tag_total = page[1]; 
 
         //string-> int형 변환 -> int형 9
         Tag_totalInt = Integer.parseInt(Tag_total);
