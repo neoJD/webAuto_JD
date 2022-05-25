@@ -1,22 +1,17 @@
 package Base;
-import com.beust.ah.A;
-import com.sun.tools.javac.Main;
-import jdk.swing.interop.SwingInterOpUtils;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.PointerInput;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class ScrollDown extends MainMenu{
-    public static void Scrolldown(WebElement Mainmenu) {
+import static Base.GoogleLogin.*;
+
+public class Scroll extends MainMenu {
+    public static void Scroll(WebElement Mainmenu) {
         // timeline에 있는 모든 페이지 정보를 불러오는 메소드
         try {
 
@@ -29,12 +24,12 @@ public class ScrollDown extends MainMenu{
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
 
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static void TimeLine_Scrolldown(WebElement TimeLine){
+    public static void TimeLine_Scrolldown(WebElement TimeLine) {
         // 타임라인 전용 스크롤다운
         try {
 
@@ -48,7 +43,7 @@ public class ScrollDown extends MainMenu{
             JavascriptExecutor js = (JavascriptExecutor) driver;
             // 현재까지 최대 스크롤 길이 pageHeight
 
-            while(true) {
+            while (true) {
                 // 페이지 끝까지 스크롤다운
                 long pageHeight = (long) js.executeScript
                         ("return document.getElementsByClassName(\"TimeLinePageContainer\")[0].scrollHeight");
@@ -61,18 +56,24 @@ public class ScrollDown extends MainMenu{
                 driver.findElement(By.tagName("body")).sendKeys(Keys.END);
 
                 long current_pageHeght = (long) js.executeScript
-                        ("return document.getElementsByClassName(\"TimeLinePageContainer\")[0].scrollHeight");;
+                        ("return document.getElementsByClassName(\"TimeLinePageContainer\")[0].scrollHeight");
+                ;
 //                System.out.println("현재페이지길이: "+current_pageHeght);
 
                 if (current_pageHeght == pageHeight) {
                     break;
                 }
             }
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-//            driver.close();
         }
+    }
 
+    public static void scroll_down(int x) throws InterruptedException {
+        Actions action = new Actions(driver);
+        for (int i = 0; i < x; i++) {
+            action.sendKeys(Keys.chord(Keys.DOWN)).perform();
+        }
+        Thread.sleep(500);
     }
 }
