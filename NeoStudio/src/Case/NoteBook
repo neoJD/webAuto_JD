@@ -179,11 +179,8 @@ public class NoteBook {
         for (int i = 0; i < noteLis.size(); i++) {
             WebElement noteNameLis_side = driver.findElement(By.cssSelector("div > div.defaultLayout > div.MuiDrawer-root.MuiDrawer-docked> div > div > div > div > div:nth-child(" + (i + 1) + ") > div > div.MuiBox-root > p"));
             noteList_side.add(noteNameLis_side);
-        }
-
-        for (int i = 0; i < noteLis.size(); i++) {
             noteList_side.get(i).click();
-            System.out.println(noteList_side.get(i).getText());
+            System.out.println("[" + noteList_side.get(i).getText() + "]");
             pageCheck();
             System.out.println("---------------------------------------" + (i + 1) + "번째 노트북 -------------------------------------------");
             noteList_side.get(i).click();
