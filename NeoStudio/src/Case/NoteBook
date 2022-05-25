@@ -1,19 +1,20 @@
 package Case;
 
 import java.util.*;
-
+import Base.MainMenu;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-
 import static Base.GoogleLogin.*;
+import static Base.Scroll.*;
 
 public class NoteBook {
     ArrayList<WebElement> noteLis = new ArrayList<WebElement>();
 
     public void NBSorting() throws InterruptedException {
         Actions action = new Actions(driver);
-        WebElement noteBook = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]/li[2]"));
-        noteBook.click();
+        MainMenu M = new MainMenu();
+        M.MainMenu();
+        MainMenu.Notebook.click();
 
         WebElement side = driver.findElement(By.cssSelector("button > span.MuiIconButton-label > svg"));
         side.click();
@@ -81,90 +82,94 @@ public class NoteBook {
         System.out.println("---------------------------------------노트 정렬 완료--------------------------------------------");
     }
 
-    public void pageCheck() throws InterruptedException {
-        Thread.sleep(1000);
-
-        ArrayList<WebElement> page = new ArrayList<>();
-        page = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
-
-        Thread.sleep(2000);
-        System.out.println("카운트된 필기 페이지 수 : " + page.size());
-        if (page.size() == 0) {
-            System.out.println("*데이터 깨진 상태의 노트북*");
-        }
-
-        WebElement pageWrt_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[2]/h5"));
-        WebElement page_R = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[1]/p"));
-        System.out.println("네비게이션 바 내 필기 페이지 수 : " + pageWrt_L.getText());
-
-        Thread.sleep(500);
-        String page_str_write = page_R.getText().substring(22);
-        String[] splited1 = page_str_write.split(" ");
-        String page_write = (splited1[0] + splited1[1]).trim();
-
-        System.out.println("메인페이지 내 필기 페이지 수 : " + page_write);
-
-        if (Objects.equals(pageWrt_L.getText(), page_write) && Objects.equals(pageWrt_L.getText(), Integer.toString(page.size()))) {
-            System.out.println("필기 페이지 수 일치 : PASS");
-        } else {
-            System.out.println("필기 페이지 수 일치 : FAIL");
-        }
-
-        ArrayList<WebElement> pageLis = new ArrayList<WebElement>();
-        pageLis = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
-
-        ArrayList<String> pageName = new ArrayList<>();
-        ArrayList<String> pageName_sort = new ArrayList<>();
-
-        for (int i = 0; i < pageLis.size(); i++) {
-            WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + (i + 1) + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
-            pageName.add(pageList.getText());
+    public void pageCheck(){
+        try {
             Thread.sleep(1000);
-        }
-        System.out.println("이름순 정렬 전 페이지 리스트 : " + pageName);
-        Collections.sort(pageName);
-        System.out.println("실제 이름순 정렬된 페이지 리스트 : " + pageName);
 
-        WebElement pageComboButton = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[2]/button"));
-        pageComboButton.click();
+            ArrayList<WebElement> page = new ArrayList<>();
+            page = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
 
-        WebElement pageNameSorting = driver.findElement(By.xpath("//*[@id=\"menu-list-grow\"]/li[2]"));
-        pageNameSorting.click();
-        Thread.sleep(1000);
+            Thread.sleep(2000);
+            System.out.println("카운트된 필기 페이지 수 : " + page.size());
+            if (page.size() == 0) {
+                System.out.println("*데이터 깨진 상태의 노트북*");
+            } else {
+            }
 
-        for (int i = 0; i < pageLis.size(); i++) {
-            WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + (i + 1) + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
-            pageName_sort.add(pageList.getText());
-        }
-        System.out.println("이름순 정렬된 페이지 리스트 : " + pageName_sort);
+            WebElement pageWrt_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[2]/h5"));
+            WebElement page_R = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[1]/p"));
+            System.out.println("네비게이션 바 내 필기 페이지 수 : " + pageWrt_L.getText());
 
-        if (Arrays.equals(pageName.toArray(), pageName_sort.toArray()) == true) {
-            System.out.println("페이지 이름순 정렬 : PASS");
-        } else {
-            System.out.println("페이지 이름순 정렬 : FAIL");
-        }
+            Thread.sleep(500);
+            String page_str_write = page_R.getText().substring(22);
+            String[] splited1 = page_str_write.split(" ");
+            String page_write = (splited1[0] + splited1[1]).trim();
 
-        WebElement pageAll = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[1]"));
-        pageAll.click();
+            System.out.println("메인페이지 내 필기 페이지 수 : " + page_write);
 
-        ArrayList<WebElement> page2 = new ArrayList<>();
-        page2 = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
+            if (Objects.equals(pageWrt_L.getText(), page_write) && Objects.equals(pageWrt_L.getText(), Integer.toString(page.size()))) {
+                System.out.println("필기 페이지 수 일치 : PASS");
+            } else {
+                System.out.println("필기 페이지 수 일치 : FAIL");
+            }
 
-        Thread.sleep(2000);
-        System.out.println("카운트된 전체 페이지 수 : " + page2.size());
+            ArrayList<WebElement> pageLis = new ArrayList<WebElement>();
+            pageLis = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
 
-        WebElement pageAll_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[1]/h5"));
-        System.out.println("네비게이션 바 내 전체 페이지 수 : " + pageAll_L.getText());
+            ArrayList<String> pageName = new ArrayList<>();
+            ArrayList<String> pageName_sort = new ArrayList<>();
 
-        String page_str_all = page_R.getText();
-        String[] splited2 = page_str_all.split("/");
-        String page_all = splited2[1];
-        System.out.println("메인페이지 내 전체 페이지 수 : " + page_all);
+            for (int i = 0; i < pageLis.size(); i++) {
+                WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + (i + 1) + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
+                pageName.add(pageList.getText());
+                Thread.sleep(1000);
+            }
+            System.out.println("이름순 정렬 전 페이지 리스트 : " + pageName);
+            Collections.sort(pageName);
+            System.out.println("실제 이름순 정렬된 페이지 리스트 : " + pageName);
 
-        if (Objects.equals(pageWrt_L.getText(), Integer.toString(page2.size())) && Objects.equals(pageAll_L.getText(), page_all)) {
-            System.out.println("전체 페이지 수 일치 : PASS");
-        } else {
-            System.out.println("전체 페이지 수 일치 : FAIL");
+            WebElement pageComboButton = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[2]/div[1]/div/div[2]/button"));
+            pageComboButton.click();
+
+            WebElement pageNameSorting = driver.findElement(By.xpath("//*[@id=\"menu-list-grow\"]/li[2]"));
+            pageNameSorting.click();
+            Thread.sleep(1000);
+
+            for (int i = 0; i < pageLis.size(); i++) {
+                WebElement pageList = driver.findElement(By.cssSelector("ul > div:nth-child(" + (i + 1) + ") > span.MuiTypography-root.MuiTypography-caption.MuiTypography-colorTextPrimary.MuiTypography-alignLeft"));
+                pageName_sort.add(pageList.getText());
+            }
+            System.out.println("이름순 정렬된 페이지 리스트 : " + pageName_sort);
+
+            if (Arrays.equals(pageName.toArray(), pageName_sort.toArray()) == true) {
+                System.out.println("페이지 이름순 정렬 : PASS");
+            } else {
+                System.out.println("페이지 이름순 정렬 : FAIL");
+            }
+
+            WebElement pageAll = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[1]"));
+            pageAll.click();
+
+            ArrayList<WebElement> page2 = new ArrayList<>();
+            page2 = (ArrayList<WebElement>) driver.findElements(By.cssSelector("div > div.MuiGrid-root.MuiGrid-container.MuiGrid-item.MuiGrid-grid-xs-12.MuiGrid-grid-sm-true > div.MuiBox-root > ul > div"));
+
+            Thread.sleep(2000);
+            System.out.println("카운트된 전체 페이지 수 : " + page2.size());
+
+            WebElement pageAll_L = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div[1]/button[1]/h5"));
+            System.out.println("네비게이션 바 내 전체 페이지 수 : " + pageAll_L.getText());
+
+            String page_str_all = page_R.getText();
+            String[] splited2 = page_str_all.split("/");
+            String page_all = splited2[1];
+            System.out.println("메인페이지 내 전체 페이지 수 : " + page_all);
+
+            if (Objects.equals(pageAll_L.getText(), Integer.toString(page2.size())) && Objects.equals(pageAll_L.getText(), page_all)) {
+                System.out.println("전체 페이지 수 일치 : PASS");
+            } else {
+                System.out.println("전체 페이지 수 일치 : FAIL");
+            }
+        } catch (Exception e) {
         }
     }
 
@@ -184,5 +189,10 @@ public class NoteBook {
             noteList_side.get(i).click();
             scroll_down(4);
         }
+    }
+
+    public void NoteBook_Run() throws InterruptedException {
+        NBSorting();
+        NBpageList();
     }
 }
