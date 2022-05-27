@@ -6,10 +6,13 @@ import Case.Record;
 import static Base.GoogleLogin.driver;
 
 public class NeoAuto {
+
+
     public static void main(String[] args) {
         try {
             GoogleLogin googleLogin = new GoogleLogin();
 
+            RunTime.setStartTime();
             googleLogin.Login();
             Timeline.checkPages();
             Timeline.PagesByDate();
@@ -18,6 +21,9 @@ public class NeoAuto {
             Tag.checkTotalTag();
             Record.checkTotalRecord();
             Favorite.checkTotalFavorite();
+            RunTime.setEndTime();
+            RunTime.elapsedTime();
+            TestcaseDown.tcDown();
         } catch (Exception e) {
 
         } finally {
