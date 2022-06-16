@@ -9,8 +9,8 @@ import java.util.List;
 
 public class GoogleLogin {
     private WebElement element;
-    private String google_email = "hansol@neolab.net";
-    private String password = "neoneo970228!";
+    private String google_email = "neo.jd@neolab.net";
+    private String password = "whdejr11!";
 
     public static WebDriver driver;
     private String url;
@@ -22,7 +22,7 @@ public class GoogleLogin {
         driver = new ChromeDriver();
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
-        url = "https://neostudio-staging.web.app/";
+        url = "https://neostudiodev.web.app/"; // 네오스튜디오 dev 버전으로 url 변경
     }
 
     public void Login() throws InterruptedException {
