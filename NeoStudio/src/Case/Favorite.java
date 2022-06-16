@@ -32,7 +32,7 @@ public class Favorite {
 
             //0. 전체 페이지수 : 공백으로 문자열 나누기 - 엘리먼트로 그 값 가져오기
             //1. 즐겨찾기 str 배열로 만들고 리스트 하나 만들어서 전체 배열 담기
-            driver.manage().timeouts().implicitlyWait(2, TimeUnit.SECONDS);
+            driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
             WebElement favorite_ele = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div[1]/main/div/div/div/div[1]/p"));
 
             favorite_str = favorite_ele.getText(); // web > string
