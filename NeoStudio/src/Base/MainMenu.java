@@ -16,17 +16,19 @@ public class MainMenu {
     public static WebElement Favorite;
     public static WebElement Setting;
 
+    public static void focus(){
+        WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]"));
+        Actions bulider = new Actions(driver);
+        bulider.click(categoryTime)
+                .sendKeys(Keys.chord(Keys.PAGE_DOWN)).perform();
+    }
     public static void MainMenu() {
+
         try {
             Thread.sleep(2000);
-            
-            
-            // Timeline 클리 후 페이지다운키 누르기
-            WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]/li[1]"));
-            Actions bulider = new Actions(driver);
-           bulider.click(categoryTime)
-                    .sendKeys(Keys.chord(Keys.PAGE_DOWN)).perform();
 
+
+            // Timeline 클리 후 페이지다운키 누르기
 
             // mainMenuName 어레이 리스트에 각 메뉴의 엘리먼트 할당하기
             WebElement temp;
