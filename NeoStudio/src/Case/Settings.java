@@ -32,6 +32,14 @@ public class Settings {
 
         WebElement logout_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[1]/div[2]/button"));
         logout_Button.click();
+
+        driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
+
+        WebElement confirm_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div/div/ul/button[2]/span[1]"));
+//        confirm_Button.click(); // 확인 버튼 클릭 (로그아웃 할 경우)
+
+        WebElement cancel_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/div[3]/div/div/ul/button[1]/span[1]"));
+        cancel_Button.click(); // 취소 버튼 클릭 (로그아웃 하지 않을 경우)
     }
 
 
