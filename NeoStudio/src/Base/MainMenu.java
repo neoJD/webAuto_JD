@@ -16,17 +16,15 @@ public class MainMenu {
     public static WebElement Favorite;
     public static WebElement Setting;
 
-    public static void focus(){
-        WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]"));
-        Actions bulider = new Actions(driver);
-        bulider.click(categoryTime)
-                .sendKeys(Keys.chord(Keys.PAGE_DOWN)).perform();
-    }
+
     public static void MainMenu() {
 
         try {
             Thread.sleep(2000);
 
+            WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]"));
+            Actions bulider = new Actions(driver);
+            bulider.click(categoryTime.sendKeys(Keys.chord(Keys.PAGE_DOWN)).perform();
 
             // Timeline 클리 후 페이지다운키 누르기
 
