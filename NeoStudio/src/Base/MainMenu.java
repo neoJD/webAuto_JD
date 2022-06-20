@@ -24,7 +24,9 @@ public class MainMenu {
 
             WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]"));
             Actions bulider = new Actions(driver);
-            bulider.click(categoryTime.sendKeys(Keys.chord(Keys.PAGE_DOWN)).perform();
+            bulider.click(categoryTime)
+                .sendKeys(Keys.chord(Keys.PAGE_DOWN))
+                .perform();
 
             // Timeline 클리 후 페이지다운키 누르기
 
