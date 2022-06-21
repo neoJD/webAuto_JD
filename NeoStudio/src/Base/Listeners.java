@@ -15,6 +15,7 @@ public class Listeners implements WebDriverEventListener {
     @Override
     public void beforeAlertAccept(WebDriver driver) {
 
+
     }
 
     @Override
@@ -34,12 +35,10 @@ public class Listeners implements WebDriverEventListener {
 
     @Override
     public void beforeNavigateTo(String url, WebDriver driver) {
-        System.out.println("beforeNavigateTo : " + driver.getCurrentUrl());
     }
 
     @Override
     public void afterNavigateTo(String url, WebDriver driver) {
-        System.out.println("afterNavigateTo : " + driver.getCurrentUrl());
     }
 
     @Override
@@ -79,7 +78,6 @@ public class Listeners implements WebDriverEventListener {
 
     @Override
     public void afterFindBy(By by, WebElement element, WebDriver driver) {
-
     }
 
     @Override
@@ -130,6 +128,7 @@ public class Listeners implements WebDriverEventListener {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        //예외 상황일 경우 지정된 경로에 스크린샷 저장하도록 함
     }
 
     @Override
@@ -148,19 +147,20 @@ public class Listeners implements WebDriverEventListener {
     }
 
     @Override
-    public void afterGetText(WebElement element, WebDriver driver, String text) {
+    public void afterGetText(WebElement element, WebDriver driver, String text) { //getText 동작이 트리거로 동작하는 리스너
         if(element.getText().contains("Page Not Found")==true){
             System.out.println("에러 페이지 노출 : " + driver.getCurrentUrl());
-            String url = driver.getCurrentUrl().substring(8).replace("/", "_");
+            String url = driver.getCurrentUrl().substring(8).replace("/", "_"); //url 내에 / 포함된 상태 > 파일 경로로 인식되기 때문에 _로 치환
             File scrFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
             try {
                 FileUtils.copyFile(scrFile, new File("/Users/sykim/AutomationProject/ExceptionCapture/" + url + ".png"));
-            } catch (IOException e) {
+            } 
+            //노출된 페이지 내에 에러 문구 있을 경우 해당 페이지의 스크린샷을 지정된 경로에 저장되도록 함
+            catch (IOException e) {
                 e.printStackTrace();
             }
         }
         else{
-//            System.out.println("페이지 정상 노출 : " + driver.getCurrentUrl());
         }
     }
 
