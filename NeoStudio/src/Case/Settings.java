@@ -1,12 +1,14 @@
 package Case;
 
 import Base.GoogleLogin;
+import Base.Listeners;
 import Base.MainMenu;
 import Base.Scroll;
 import com.beust.ah.A;
 import org.apache.poi.ss.formula.functions.T;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 
@@ -44,72 +46,26 @@ public class Settings {
 
 
     public static void ChangeTheme() {
+        MainMenu M = new MainMenu();
+        M.MainMenu();
+        Setting.click();
 
-        try {
-            MainMenu M = new MainMenu();
-            M.MainMenu();
-            Setting.click();
-
-            WebElement change_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[2]/div[2]/div/button\n"));
-
-            //테마 "html/body" 컬러 확인을 위한 엘리먼트
-            WebElement body = driver.findElement(By.xpath("/html/body"));
-
-        /*
-        #121212 : 블랙 // 일반(기본) 모드일때
-        #f5f5f5 : 회색 // 다크 모드일때
-         */
-            String blackTheme = "#ffffff";
-            String whiteTheme = "#121212";
-            String current_rgbaColor = body.getCssValue("color"); // rgba 컬러
-            String current_hexColor = Color.fromString(current_rgbaColor).asHex(); // rgba 컬러 포맷을 hex로 변환
-
-            // 결과 확인
-            if (current_hexColor == "#ffffff") {
-                // 블랙테마일경우
-                change_Button.click();
-                Thread.sleep(2000);
-
-                // 바뀌었는지 확인
-                current_rgbaColor = body.getCssValue("color"); // rgba 컬러
-                current_hexColor = Color.fromString(current_rgbaColor).asHex();
-
-                if (current_hexColor.equals(whiteTheme)) {
-                    System.out.println("현재 hexColor: " + current_hexColor + ", 블랙테마에서 화이트테마로 변경 : PASS");
-                } else {
-                    System.out.println("테마 변경에 실패하였습니다.");
-                }
-
-
-            } else {
-                // 화이트 테마일경우
-                change_Button.click();
-                Thread.sleep(2000);
-
-                // 바뀌었는지 확인
-                current_rgbaColor = body.getCssValue("color"); // rgba 컬러
-                current_hexColor = Color.fromString(current_rgbaColor).asHex();
-
-                if (current_hexColor.equals(blackTheme)) {
-                    System.out.println("현재 hexColor: " + current_hexColor + ", 화이트테마에서 블랙테마로 변경: PASS");
-                } else {
-                    System.out.println("테마 변경에 실패하였습니다.");
-                }
-
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        WebElement change_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[2]/div[2]/div/button\n"));
+        change_Button.click();
     }
 
     public static void Check_Ligal_Policy() {
         //언어별로 개인정보, 이용약관 페이지 열고 확인
 
+        EventFiringWebDriver eventHandler = new EventFiringWebDriver(driver);
+        Listeners listener = new Listeners();
+        eventHandler.register(listener);
+
         try {
             MainMenu M = new MainMenu();
             M.MainMenu();
             Setting.click();
+
 
             WebElement Privacy_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[4]/div[2]/button"));
             WebElement Terms_Condition_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[4]/div[3]/button"));
@@ -117,7 +73,8 @@ public class Settings {
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
             //원래 탭 originalTap 설정
-            String originalTap = driver.getWindowHandle();
+//            String originalTap = driver.getWindowHandle();
+
 
             // 언어선택 버튼 엘리먼트 생성
             WebElement language_button = driver.findElement(By.xpath
@@ -129,7 +86,7 @@ public class Settings {
             driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 
 
-            for (int i = 0; i<4; i++ ){
+            for (int i = 0; i < 4; i++) {
 
                 language_button.click();
                 Thread.sleep(3000);
@@ -150,22 +107,36 @@ public class Settings {
                 Privacy_Button.click(); // 개인정보 선택
                 Thread.sleep(3000);
 
-                driver.switchTo().window(originalTap); // 원래 탭으로 이동
+                List<String> tabs = new ArrayList<>(driver.getWindowHandles());
+                driver.switchTo().window(tabs.get(1)); //새탭으로 포커싱
+                Thread.sleep(1000);
+
+                WebElement privacyPage = eventHandler.findElement(By.xpath("/html"));
+                String privacyPage_check = privacyPage.getText(); //개인정보 텍스트 받음 > 이때 이벤트 리스너
+                driver.close(); //개인정보 tab 닫음
+
+                driver.switchTo().window(tabs.get(0)); // 원래 탭으로 이동
                 Thread.sleep(3000);
 
                 Terms_Condition_Button.click(); // 약관 선택
                 Thread.sleep(3000);
+                List<String> tabs2 = new ArrayList<>(driver.getWindowHandles());
+                driver.switchTo().window(tabs2.get(1)); //새탭으로 포커싱
 
-                driver.switchTo().window(originalTap); // 원래 탭으로 이동
+                WebElement termsPage = eventHandler.findElement(By.xpath("/html"));
+                String termsPage_check = termsPage.getText(); //약관 텍스트 받음 > 이때 이벤트 리스너
+                driver.close(); //약관 tab 닫음
+
+                driver.switchTo().window(tabs2.get(0)); // 원래 탭으로 이동
                 Thread.sleep(3000);
-
             }
 
 
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         } finally {
 //            driver.close();
         }
+        eventHandler.unregister(listener);
     }
 }
