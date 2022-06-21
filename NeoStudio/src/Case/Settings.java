@@ -44,12 +44,63 @@ public class Settings {
 
 
     public static void ChangeTheme() {
-        MainMenu M = new MainMenu();
-        M.MainMenu();
-        Setting.click();
 
-        WebElement change_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[2]/div[2]/div/button\n"));
-        change_Button.click();
+        try {
+            MainMenu M = new MainMenu();
+            M.MainMenu();
+            Setting.click();
+
+            WebElement change_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[2]/div[2]/div/button\n"));
+
+            //테마 "html/body" 컬러 확인을 위한 엘리먼트
+            WebElement body = driver.findElement(By.xpath("/html/body"));
+
+        /*
+        #121212 : 블랙 // 일반(기본) 모드일때
+        #f5f5f5 : 회색 // 다크 모드일때
+         */
+            String blackTheme = "#ffffff";
+            String whiteTheme = "#121212";
+            String current_rgbaColor = body.getCssValue("color"); // rgba 컬러
+            String current_hexColor = Color.fromString(current_rgbaColor).asHex(); // rgba 컬러 포맷을 hex로 변환
+
+            // 결과 확인
+            if (current_hexColor == "#ffffff") {
+                // 블랙테마일경우
+                change_Button.click();
+                Thread.sleep(2000);
+
+                // 바뀌었는지 확인
+                current_rgbaColor = body.getCssValue("color"); // rgba 컬러
+                current_hexColor = Color.fromString(current_rgbaColor).asHex();
+
+                if (current_hexColor.equals(whiteTheme)) {
+                    System.out.println("현재 hexColor: " + current_hexColor + ", 블랙테마에서 화이트테마로 변경 : PASS");
+                } else {
+                    System.out.println("테마 변경에 실패하였습니다.");
+                }
+
+
+            } else {
+                // 화이트 테마일경우
+                change_Button.click();
+                Thread.sleep(2000);
+
+                // 바뀌었는지 확인
+                current_rgbaColor = body.getCssValue("color"); // rgba 컬러
+                current_hexColor = Color.fromString(current_rgbaColor).asHex();
+
+                if (current_hexColor.equals(blackTheme)) {
+                    System.out.println("현재 hexColor: " + current_hexColor + ", 화이트테마에서 블랙테마로 변경: PASS");
+                } else {
+                    System.out.println("테마 변경에 실패하였습니다.");
+                }
+
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void Check_Ligal_Policy() {
