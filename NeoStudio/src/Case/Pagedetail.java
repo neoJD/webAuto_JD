@@ -26,6 +26,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Pagedetail{
 
+    // 선언할거 정해주기
     public static String PageTotal;
     public static String PageTotalStr;
     public static WebElement Notebook;
@@ -52,11 +53,10 @@ public class Pagedetail{
         System.out.println("==== Pagedetail 진입 완료====");
         // 상세페이지 진입 완료
         //1. 하단 전체 페이지 수 확인 - 전체 페이지 수 리스트 str->int 전환
-        //pagetotal(str)-> int형 변환
     }
 
 
-
+    //public class Move{
     public static void FileMove()throws IOException {
 
         File test = new File("/Users/gimhansol/Downloads");
@@ -69,6 +69,13 @@ public class Pagedetail{
 
         ArrayList<String> getFileList = new ArrayList<>();
         //여기부터 file 옮기는 부분
+
+        File dir =new File("/Users/gimhansol/Documents/AutomationProject/0622");
+            //디렉토리 생성
+        boolean DirectoryCreated= dir.mkdir();
+            //결과 출력
+        System.out.println(DirectoryCreated);
+        
         for (File file : fileList) {
             getFileList.add(file.toString());//받은 파일 리스트의 원래 경로 저장
         }
@@ -86,8 +93,7 @@ public class Pagedetail{
 
                 Path newFilePath= Files.move(file1, newFile1, StandardCopyOption.REPLACE_EXISTING);
                 System.out.println(newFilePath);
-
-
+                
             }
 
         } catch (IOException e) {
@@ -95,12 +101,7 @@ public class Pagedetail{
         }
 
     }
-
-
-
-
-
-
+    
     public static void imagedown() {
         try {
             PageCount = driver.findElement(By.cssSelector("div > span:nth-child(4)"));
@@ -132,20 +133,7 @@ public class Pagedetail{
         }
 
     }
-
-    public static void Directory(){
-        try{
-            File dir =new File("/Users/gimhansol/Documents/AutomationProject/0622");
-            //디렉토리 생성
-            boolean DirectoryCreated= dir.mkdir();
-            //결과 출력
-            System.out.println(DirectoryCreated);
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-
+    
     public static void Compare(){
         File test=new File("/Users/gimhansol/Downloads");
         File newtest =new File("/Users/gimhansol/Documents/AutomationProject/0622");
@@ -177,7 +165,6 @@ public class Pagedetail{
                 result.add("PASS");
             }
             else{
-//                    System.out.println("링크 복사 토스트 팝업 확인 : FAIL");
                 item.add("링크 복사 토스트 팝업 확인");
                 result.add("FAIL");
             }
@@ -190,9 +177,6 @@ public class Pagedetail{
         }
 
     }
-
-
-
 
 
 }
