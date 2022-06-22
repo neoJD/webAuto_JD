@@ -8,7 +8,6 @@ import java.util.Date;
 public class RunTime {
 
     public static String startTime;
-    public static String downloadTime;
     public static String endTime;
     
     public static Date time_start;
@@ -23,9 +22,7 @@ public class RunTime {
         time_start = Calendar.getInstance().getTime();
         start = System.currentTimeMillis();
         SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 hh시 mm분 ss초");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("hh시 mm분 ss초");
         startTime = format.format(time_start);
-        downloadTime = timeFormat.format(time_start);
     }
 
     public static void setEndTime(){
