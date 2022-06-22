@@ -51,6 +51,7 @@ public class Settings {
             MainMenu M = new MainMenu();
             M.MainMenu();
             Setting.click();
+            Thread.sleep(2000);
 
             WebElement change_Button = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/main/div/div/ul/li[2]/div[2]/div/button\n"));
 
@@ -67,10 +68,10 @@ public class Settings {
             String current_hexColor = Color.fromString(current_rgbaColor).asHex(); // rgba 컬러 포맷을 hex로 변환
 
             // 결과 확인
-            if (current_hexColor == "#ffffff") {
+            if (current_hexColor.equals(blackTheme)) {
                 // 블랙테마일경우
                 change_Button.click();
-                Thread.sleep(2000);
+                Thread.sleep(3000);
 
                 // 바뀌었는지 확인
                 current_rgbaColor = body.getCssValue("color"); // rgba 컬러
@@ -90,7 +91,7 @@ public class Settings {
             } else {
                 // 화이트 테마일경우
                 change_Button.click();
-                Thread.sleep(2000);
+                Thread.sleep(3000);
 
                 // 바뀌었는지 확인
                 current_rgbaColor = body.getCssValue("color"); // rgba 컬러
@@ -112,6 +113,7 @@ public class Settings {
             e.printStackTrace();
         }
     }
+
 
     public static void Check_Ligal_Policy() {
         //언어별로 개인정보, 이용약관 페이지 열고 확인
