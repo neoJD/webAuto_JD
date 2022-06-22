@@ -146,7 +146,7 @@ public class Pagedetail{
         }
     }
 
-    public static void vs(){
+    public static void Compare(){
         File test=new File("/Users/gimhansol/Downloads");
         File newtest =new File("/Users/gimhansol/Documents/AutomationProject/0622");
 
