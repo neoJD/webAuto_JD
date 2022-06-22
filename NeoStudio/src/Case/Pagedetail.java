@@ -115,9 +115,18 @@ public class Pagedetail{
         }
 
     }
-
-
-
+    public static void Directory(){
+        try{
+            File dir =new File("/Users/gimhansol/Documents/AutomationProject/0622");
+            //디렉토리 생성
+            boolean DirectoryCreated= dir.mkdir();
+            //결과 출력
+            System.out.println(DirectoryCreated);
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+    }
 
 
 }
