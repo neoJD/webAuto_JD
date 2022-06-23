@@ -22,7 +22,7 @@ public class MainMenu {
         try {
             Thread.sleep(2000);
 
-            WebElement categoryTime = driver.findElement(By.xpath("//*[@id="root"]/div/div/div[1]/div/div[2]/hr[1]"));
+            WebElement categoryTime = driver.findElement(By.xpath("//*[@id=\"root\"]/div/div/div[1]/div/div[2]/hr[1]"));
             Actions bulider = new Actions(driver);
             bulider.click(categoryTime)
                 .sendKeys(Keys.chord(Keys.PAGE_DOWN))
