@@ -45,7 +45,12 @@ public class HtmlJavaSend {
 
         msg.setFrom(new InternetAddress(userName));
         InternetAddress[] toAddresses = {new InternetAddress(toAddress)};
+                
+        //Address ccAddr = new InternetAddress("neo.jd@neolab.net"); // 참조인 추가
+        
         msg.setRecipients(Message.RecipientType.TO, toAddresses);
+        // msg.addRecipient(Message.RecipientType.CC, ccAddr); // 참조인 추가
+
         msg.setSubject(subject);
         msg.setSentDate(new Date());
 
