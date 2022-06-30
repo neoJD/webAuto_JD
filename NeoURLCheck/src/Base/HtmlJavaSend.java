@@ -1,4 +1,4 @@
-
+package Base;
 
 import java.util.Date;
 import java.util.Properties;
@@ -11,6 +11,9 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+
+import static Base.CheckURL.*;
+import static Base.UrlList.*;
 
 public class HtmlJavaSend {
 
@@ -26,7 +29,7 @@ public class HtmlJavaSend {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
         properties.put("mail.smtp.tls.trust","mail.gmail.com"); // Could not convert socket to TLS; Server is not trusted
-        properties.put("mail.debug", "true");
+//        properties.put("mail.debug", "true");
 
         // creates a new session with an authenticator
         Authenticator auth = new Authenticator() {
@@ -54,7 +57,7 @@ public class HtmlJavaSend {
 
     }
 
-    public static void main(String[] args) {
+    public static void sendEmail(){
         // SMTP server information
         //String host = "smtp.naver.com";
         String host = "smtp.gmail.com"; // gmail 발신 서버
@@ -63,13 +66,17 @@ public class HtmlJavaSend {
         String password = "kyqrxebyukvqgdal"; //
 
         // outgoing message information
-        String mailTo = "_qa@neolab.net";
-        String subject = "메일테스트";
+        String mailTo = "sykim@neolab.net";
+        String subject = "[Issue Report] 네오랩 컨버전스 자사 웹 페이지 오류 보고.";
 
-        // message contains HTML markups
-        String message = "<i>send email!</i><br>";
-        message += "<b> 한글테스트!</b><br>";
-        message += "<font color=red>finish</font>";
+        String message = "<p>네오랩 컨버전스 자사 웹 페이지 오류 보고 드립니다.</p>";
+
+        for(int i=0; i<error_urlList.size(); i++) {
+            message += "<p>" + (i+1) + " : " + error_urlList.get(i) + " > " + error_code.get(i) + " : " + error_summary.get(i) + "</p>";
+        }
+        //반복문으로 번호, 에러 url, 코드, 요약 순서대로 메일에 
+        message += "<p>상기 웹 페이지 링크 오류 발생한 상태입니다. 조속한 확인 부탁 드립니다.";
+        message += "<p>감사합니다.";
 
         HtmlJavaSend mailer = new HtmlJavaSend();
 
