@@ -1,9 +1,9 @@
-package Main;
+package Base.NeoURLCheck.src.Main;
 
-import Base.*;
+import Base.NeoURLCheck.src.Base.*;
 
-import static Base.CheckURL.*;
-import static Base.UrlList.*;
+import static Base.NeoURLCheck.src.Base.CheckURL.*;
+import static Base.NeoURLCheck.src.Base.UrlList.*;
 
 public class Main {
     public static void main(String[] args) {

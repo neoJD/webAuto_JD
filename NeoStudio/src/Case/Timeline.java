@@ -1,13 +1,13 @@
-package Case;
-import Base.*;
+package Base.NeoStudio.src.Case;
+import Base.NeoStudio.src.Base.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.*;
-import static Base.MainMenu.*;
+import static Base.NeoStudio.src.Base.MainMenu.*;
 import static Base.GoogleLogin.driver;
-import Base.Scroll;
+import Base.NeoStudio.src.Base.Scroll;
 
-import static Base.CaseList.*;
+import static Base.NeoStudio.src.Base.CaseList.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;

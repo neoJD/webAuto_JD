@@ -1,11 +1,11 @@
-package Case;
+package Base.NeoStudio.src.Case;
 
-import Base.GoogleLogin;
-import Base.MainMenu;
+import Base.NeoStudio.src.Base.GoogleLogin;
+import Base.NeoStudio.src.Base.MainMenu;
 
-import static Base.CaseList.item;
-import static Base.CaseList.result;
-import static Base.Scroll.*;
+import static Base.NeoStudio.src.Base.CaseList.item;
+import static Base.NeoStudio.src.Base.CaseList.result;
+import static Base.NeoStudio.src.Base.Scroll.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;

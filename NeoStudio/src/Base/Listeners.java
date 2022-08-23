@@ -1,4 +1,4 @@
-package Base;
+package Base.NeoStudio.src.Base;
 
 
 import org.apache.commons.io.FileUtils;
@@ -7,7 +7,7 @@ import org.openqa.selenium.support.events.WebDriverEventListener;
 import java.io.File;
 import java.io.IOException;
 
-import static Base.CaseList.*;
+import static Base.NeoStudio.src.Base.CaseList.*;
 
 public class Listeners implements WebDriverEventListener {
 

@@ -1,4 +1,4 @@
-package Base;
+package Base.NeoStudio.src.Base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

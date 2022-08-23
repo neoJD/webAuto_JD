@@ -1,14 +1,14 @@
-package Case;
-import Base.MainMenu;
+package Base.NeoStudio.src.Case;
+import Base.NeoStudio.src.Base.MainMenu;
 
-import Base.PageViewItem;
+import Base.NeoStudio.src.Base.PageViewItem;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import static Base.GoogleLogin.driver;
-import static Base.PageViewItem.Back_Button;
-import static Base.PageViewItem.LinkPaste_Button;
-import static Base.CaseList.*;
+import static Base.NeoStudio.src.Base.PageViewItem.Back_Button;
+import static Base.NeoStudio.src.Base.PageViewItem.LinkPaste_Button;
+import static Base.NeoStudio.src.Base.CaseList.*;
 
 import java.util.ArrayList;
 import java.util.List;

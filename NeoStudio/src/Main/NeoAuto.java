@@ -1,8 +1,8 @@
-package Main;
+package Base.NeoStudio.src.Main;
 
-import Base.*;
-import Case.*;
-import Case.Record;
+import Base.NeoStudio.src.Base.*;
+import Base.NeoStudio.src.Case.*;
+import Base.NeoStudio.src.Case.Record;
 import static Base.GoogleLogin.driver;
 
 public class NeoAuto {

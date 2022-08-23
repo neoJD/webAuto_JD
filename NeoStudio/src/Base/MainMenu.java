@@ -1,6 +1,6 @@
-package Base;
+package Base.NeoStudio.src.Base;
 
-import Case.NoteBook;
+import Base.NeoStudio.src.Case.NoteBook;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;

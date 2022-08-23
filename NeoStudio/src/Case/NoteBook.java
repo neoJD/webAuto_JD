@@ -1,15 +1,15 @@
-package Case;
+package Base.NeoStudio.src.Case;
 
 import java.util.*;
 
-import Base.MainMenu;
+import Base.NeoStudio.src.Base.MainMenu;
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 
-import static Base.CaseList.item;
-import static Base.CaseList.result;
+import static Base.NeoStudio.src.Base.CaseList.item;
+import static Base.NeoStudio.src.Base.CaseList.result;
 import static Base.GoogleLogin.*;
-import static Base.Scroll.*;
+import static Base.NeoStudio.src.Base.Scroll.*;
 
 
 public class NoteBook {

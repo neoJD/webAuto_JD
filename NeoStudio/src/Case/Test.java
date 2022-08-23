@@ -1,6 +1,6 @@
-package Case;
+package Base.NeoStudio.src.Case;
 
-import Base.PageViewItem;
+import Base.NeoStudio.src.Base.PageViewItem;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 import static Base.GoogleLogin.driver;
-import static Base.PageViewItem.*;
+import static Base.NeoStudio.src.Base.PageViewItem.*;
 
 public class Test {
     public static void test(){

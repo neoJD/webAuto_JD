@@ -1,8 +1,8 @@
-package Case;
+package Base.NeoStudio.src.Case;
 
 import Base.GoogleLogin;
-import Base.MainMenu;
-import Base.Scroll;
+import Base.NeoStudio.src.Base.MainMenu;
+import Base.NeoStudio.src.Base.Scroll;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
 
-import static Base.CaseList.item;
-import static Base.CaseList.result;
+import static Base.NeoStudio.src.Base.CaseList.item;
+import static Base.NeoStudio.src.Base.CaseList.result;
 import static Base.GoogleLogin.driver;
 
 

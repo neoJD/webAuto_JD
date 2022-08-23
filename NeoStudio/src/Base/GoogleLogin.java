@@ -1,4 +1,4 @@
-package Base;
+package Base.NeoStudio.src.Base;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;

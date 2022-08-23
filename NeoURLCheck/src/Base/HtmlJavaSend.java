@@ -1,4 +1,4 @@
-package Base;
+package Base.NeoURLCheck.src.Base;
 
 import java.util.Date;
 import java.util.Properties;
@@ -12,8 +12,8 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import static Base.CheckURL.*;
-import static Base.UrlList.*;
+import static Base.NeoURLCheck.src.Base.CheckURL.*;
+import static Base.NeoURLCheck.src.Base.UrlList.*;
 
 public class HtmlJavaSend {
 

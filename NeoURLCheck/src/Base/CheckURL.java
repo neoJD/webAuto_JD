@@ -1,4 +1,4 @@
-package Base;
+package Base.NeoURLCheck.src.Base;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
